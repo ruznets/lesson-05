@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Pristavka Dmitriy</title>
+</head>
+
+<body>
+    <div>
+        <h1>Homework  5</h1>
+        <h2>Required</h2>
+        <p> Напилить код функции modificator, такой, чтобы в результате работы кода в консоли было: sampleFunc: test | sample
+            </p>
+        <div class="code">
+            <pre>
+function sampleFunc() {
+    console.log(`${arguments.callee.name}: ${arguments[0]} | ${arguments[1]}`)
+}
+                
+function modificator(func) {
+    return function() {
+        func("test", "sample")
+    }
+}
+                
+testFunc = modificator(sampleFunc)
+                
+testFunc()
+            </pre>
+        </div>
+    </div>
+    <div>
+        <h2>Additionaly 2</h2>
+        <p> Напилить код функции modificator, такой, чтобы в результате работы кода в консоль было выведено число символов в коде функции sampleFunc, т.е.: Symbols in my code: 93 </p>
+        <div class="code">
+            <pre>
+function sampleFunc () {
+    console.info ( `Symbols in my code: ${arguments.callee + 0}` )
+}
+
+function modificator(func) {
+    // func == sampleFunc
+    sampleFunc = function() {
+        console.log(`Symbols in my code: ${func.toString().length}`);
+    }
+}
+modificator(sampleFunc)
+
+sampleFunc()
+            </pre>
+        </div>  
+    </div>
+    <div>
+        <h2>Additionaly 3</h2>
+        <p> Напилите код функции generateError, такой, чтобы в результате работы кода в консоли было сообщение об ошибке:  ► Application: Invalid arguments
+         Function needs 3 arguments, but only 1 present</p>
+        <div class="code">
+            <pre>
+function testArguments () {
+    function generateError ( numArgs ) {
+     var err = new Error ( " Invalid arguments" )
+     err.stack = `Function needs 3 arguments, but only ${numArgs} present`
+     err.name = "Application"
+     throw err
+    }
+    try {
+        arguments.length >= 3 ? null : generateError ( arguments.length )
+    } 
+    catch ( err ) {
+        console.error ( `${err.name}: ${err.message}\n${err.stack}` )
+    }
+}
+testArguments ( "Google")
+testArguments ( "Google", "Mozilla" )
+            </pre>
+        </div>  
+    </div>
+</body>
+
+</html>
